@@ -11,8 +11,3 @@ jobs:
     - name: Hello World
       run: |
         echo Hello World!
-    - name: Run a multi-line script
-        env: 
-          a = ${{toJson(github)}}
-      run: |
-        echo $a
