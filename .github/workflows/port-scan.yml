@@ -11,9 +11,6 @@ jobs:
       matrix:
         python-version: [3.8]
     steps:
-      - env:
-          TARGET_IP: ${{ github.event.client_payload.ip }}
-          TARGET_PORT: ${{ github.event.client_payload.port }}
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
@@ -34,4 +31,4 @@ jobs:
           python -m pip install python-nmap
       - name: port_scan run
         run: |
-          python port_scan.py -t $TARGET_IP -p $TARGET_PORT
+          python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }}
