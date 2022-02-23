@@ -4,9 +4,34 @@ on:
 
 jobs:
   build:
+  
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
     steps:
       - env:
           TARGET_IP: ${{ github.event.client_payload.ip }}
           TARGET_PORT: ${{ github.event.client_payload.port }}
-        run: echo $TARGET_IP | echo $TARGET_PORT
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install ubuntu core 
+        run: |
+          sudo apt-get update
+          sudo apt install git --fix-missing -y
+          sudo apt install vim -y
+          sudo apt-get install libpcap-dev -y
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+      - name: install icp
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/port_scan.py
+          python -m pip install requests
+          python -m pip install python-nmap
+      - name: port_scan run
+        run: |
+          python port_scan.py -t $TARGET_IP -p $TARGET_PORT
