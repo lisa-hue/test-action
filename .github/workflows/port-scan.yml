@@ -17,10 +17,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: install ubuntu core 
         run: |
-          sudo apt-get update
-          sudo apt install git --fix-missing -y
-          sudo apt install vim -y
-          sudo apt-get install libpcap-dev -y
           sudo apt install nmap -y
       - name: Install dependencies
         run: |
@@ -32,4 +28,4 @@ jobs:
           python -m pip install python-nmap
       - name: port_scan run
         run: |
-          python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }}
+          sudo python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }}
