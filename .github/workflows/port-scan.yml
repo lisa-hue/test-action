@@ -21,10 +21,11 @@ jobs:
           sudo apt install git --fix-missing -y
           sudo apt install vim -y
           sudo apt-get install libpcap-dev -y
+          sudo apt install nmap -y
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-      - name: install icp
+      - name: install portScan
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/port_scan.py
           python -m pip install requests
