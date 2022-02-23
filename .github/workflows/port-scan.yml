@@ -1,0 +1,12 @@
+on:
+  repository_dispatch:
+    types: [port_scan]
+
+jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          TARGET_IP: ${{ github.event.client_payload.ip }}
+          TARGET_PORT: ${{ github.event.client_payload.port }}
+        run: echo $TARGET_IP
+        run: echo $TARGET_PORT
