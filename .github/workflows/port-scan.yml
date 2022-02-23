@@ -20,12 +20,12 @@ jobs:
           sudo apt install nmap -y
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
+          sudo python -m pip install --upgrade pip
       - name: install portScan
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/port_scan.py
-          python -m pip install requests
-          python -m pip install python-nmap
+          sudo python -m pip install requests
+          sudo python -m pip install python-nmap
       - name: port_scan run
         run: |
           sudo python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }}
