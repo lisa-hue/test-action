@@ -28,4 +28,4 @@ jobs:
           sudo python -m pip install python-nmap
       - name: port_scan run
         run: |
-          sudo python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }}
+          sudo python port_scan.py -t ${{ github.event.client_payload.ip }} -p ${{ github.event.client_payload.port }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }} -tid ${{ github.event.client_payload.task_id }}
