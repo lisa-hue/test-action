@@ -44,8 +44,8 @@ def port_scan(url,uuid,taskid,scanid,hosts,port):
                 print('port : %s\tstate : %s\tinfo : %s' % (port, nm[host][proto][port]['state'],nm[host].tcp(port)['name']))
                 port_list.append({"port":port,"state":nm[host][proto][port]['state'],"info":nm[host].tcp(port)['name']})
         info_list = {"uuid":uuid,"scanid":scanid,"taskid":taskid,"host":hosts,"state":nm[host].state(),"port_info":port_list}
-        j = json.dumps(info_list)
-    print(j)
+        data = json.dumps(info_list)
+    print(data)
     rep = requests.post(url=url,json=data)
     print(rep.text)
     
