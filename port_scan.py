@@ -1,9 +1,12 @@
 import sys
 import nmap
 import argparse
+import json
+import requests
 
+info_list = {}
 
-def port_scan(hosts,port):
+def port_scan(url,uuid,taskid,scanid,hosts,port):
     try:    
     #创建端口扫描对象
         nm = nmap.PortScanner() 
@@ -15,7 +18,7 @@ def port_scan(hosts,port):
         sys.exit(0)
     try:
     #调用扫描方法，参数指定扫描主机hosts，nmap扫描命令行参数arguments
-        nm.scan(hosts=hosts, arguments=' -v -sS -p '+port)
+        nm.scan(hosts=hosts, arguments=' -v -T4 -p '+port)
     except Exception as e:
         print("Scan erro:"+str(e))
     #遍历扫描主机
@@ -25,6 +28,7 @@ def port_scan(hosts,port):
         print('Host : %s (%s)' % (host, nm[host].hostname()))
         #输出主机状态，如up、down
         print('State : %s' % nm[host].state())
+        port_list = []
         for proto in nm[host].all_protocols():
             #遍历扫描协议，如tcp、udp
             print('----------')
@@ -35,14 +39,26 @@ def port_scan(hosts,port):
             #端口列表排序
             list(lport).sort()
             #遍历端口及输出端口与状态
+            
             for port in lport:
                 print('port : %s\tstate : %s\tinfo : %s' % (port, nm[host][proto][port]['state'],nm[host].tcp(port)['name']))
-
+                port_list.append({"port":port,"state":nm[host][proto][port]['state'],"info":nm[host].tcp(port)['name']})
+        info_list = {"uuid":uuid,"scanid":scanid,"taskid":taskid,"host":hosts,"state":nm[host].state(),"port_info":port_list}
+        j = json.dumps(info_list)
+    print(j)
+    rep = requests.post(url=url,json=data)
+    print(rep.text)
+    
+    
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--target", dest='target',help="目标")
     parser.add_argument("-p", "--port", dest='port', help="端口")
+    parser.add_argument("-u", "--url", dest='url', help="返回接口")
+    parser.add_argument("-uid", "--uuid", dest='uuid', help="用户id")
+    parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
+    parser.add_argument("-tid", "--taskid", dest='taskid', help="线程id")
 
     args = parser.parse_args()
 
-    port_scan(args.target,args.port)
+    port_scan(args.url,args.uuid,args.taskid,args.scanid,args.target,args.port)
