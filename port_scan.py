@@ -18,7 +18,7 @@ def port_scan(url,uuid,taskid,scanid,hosts,port):
         sys.exit(0)
     try:
     #调用扫描方法，参数指定扫描主机hosts，nmap扫描命令行参数arguments
-        nm.scan(hosts=hosts, arguments=' -v -T4 -p '+port)
+        nm.scan(hosts=hosts, arguments=' -v -p '+port)
     except Exception as e:
         print("Scan erro:"+str(e))
     #遍历扫描主机
