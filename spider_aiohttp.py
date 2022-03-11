@@ -162,6 +162,7 @@ if __name__ == '__main__':
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     
     args = parser.parse_args()
-
+    for i in args.target:
+        print("-----:   {}".format(i))
     poolmana(args.url,args.uuid,args.scanid,args.target)
     print("程序运行结束，查收")
