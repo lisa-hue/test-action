@@ -157,11 +157,11 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--data", dest='file', help="json数据")
-    parser.add_argument("-u", "--web_url", dest='url', help="返回接口")
+    parser.add_argument("-u", "--url", dest='url', help="返回接口")
     parser.add_argument("-uid", "--uuid", dest='uuid', help="用户id")
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     
     args = parser.parse_args()
 
-    poolmana(args.web_url,args.uuid,args.scanid,args.data)
+    poolmana(args.url,args.uuid,args.scanid,args.data)
     print("程序运行结束，查收")
