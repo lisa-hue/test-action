@@ -23,6 +23,7 @@ jobs:
       - name: install spider_aiohttp
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/spider_aiohttp.py
+          curl -O ${{ github.event.client_payload.downloadurl }}
 
       - name: spider_aiohttp run
         run: |
