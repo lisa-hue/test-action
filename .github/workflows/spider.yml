@@ -26,4 +26,5 @@ jobs:
 
       - name: spider_aiohttp run
         run: |
+          echo ${{ github.event.client_payload.target }}
           sudo python spider_aiohttp.py -t ${{ github.event.client_payload.target }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
