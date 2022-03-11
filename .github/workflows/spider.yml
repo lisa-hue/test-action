@@ -1,0 +1,29 @@
+on:
+  repository_dispatch:
+    types: [spider_scan]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo python -m pip install aiohttp
+          sudo python -m pip install beautifulsoup4
+      - name: install spider_aiohttp
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/spider_aiohttp.py
+
+      - name: spider_aiohttp run
+        run: |
+          sudo python spider_aiohttp.py -d ${{ github.event.client_payload.target }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
