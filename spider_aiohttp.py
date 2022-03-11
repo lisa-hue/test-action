@@ -133,7 +133,10 @@ async def test(sem,url):
             print(e)
 
 
-def poolmana(web_url,uuid,scanid,ips):
+def poolmana(web_url,uuid,scanid,target):
+    fr = open(target, 'r',errors="ignore")
+    ips=fr.readlines()
+    fr.close()
     http_tasks = []
     loop_http = asyncio.get_event_loop()
     sem=asyncio.Semaphore(sem_num) #维持信号量
