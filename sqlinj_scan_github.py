@@ -14,7 +14,6 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Geck
            "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",}
 
 def sqlmap(host,num):
-    global total_urls
     urlnew="http://127.0.0.1:8775/task/new"
     urlscan="http://127.0.0.1:8775/scan/"
     headers={"user-agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36"}
@@ -39,13 +38,15 @@ def sqlmap(host,num):
             dat=datas.json()['data']
             if dat:
                 print('[*]data:',dat)
-                total_urls.append(host)
+                with open("sqlinj.txt",'a+',erros="ignore") as w:
+                    w.write(host+"\n")
             break
         elif staw.json()['status'] == 'running':
             continue
 
 
 def poolmana(web_url,uuid,scanid,target):
+    open("sqlinj.txt", 'a+',errors="ignore")
     fr = open(target, 'r',errors="ignore")
     ips=fr.readlines()
     fr.close()
@@ -66,6 +67,11 @@ def poolmana(web_url,uuid,scanid,target):
             pass
     p.close()
     p.join()
+    f = open('sqlinj.txt','r',errors="ignore")
+    aaa = f.readlines()
+    for inj_url in aaa:
+        inj_url = inj_url.replace("\n","")
+        total_urls.append(inj_url)
     info_list = {"uuid":uuid,"scanid":scanid,"sqlinj_url":total_urls}
     data = info_list
     print(data)
