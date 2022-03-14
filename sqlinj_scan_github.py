@@ -70,10 +70,11 @@ def poolmana(web_url,uuid,scanid,target):
     p.join()
     f = open('sqlinj.txt','r',errors="ignore")
     aaa = f.readlines()
+    sqlinj_url = []
     for inj_url in aaa:
         inj_url = inj_url.replace("\n","")
-        total_urls.append(inj_url)
-    info_list = {"uuid":uuid,"scanid":scanid,"sqlinj_url":total_urls}
+        sqlinj_url.append(inj_url)
+    info_list = {"uuid":uuid,"scanid":scanid,"sqlinj_url":sqlinj_url}
     data = info_list
     print(data)
     rep = requests.post(url=web_url,json=data)
