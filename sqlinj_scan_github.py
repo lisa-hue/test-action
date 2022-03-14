@@ -47,7 +47,8 @@ def sqlmap(host,num):
 
 
 def poolmana(web_url,uuid,scanid,target):
-    open("sqlinj.txt", 'a+',errors="ignore")
+    with open("sqlinj.txt", 'a+',errors="ignore") as w:
+         w.close()
     fr = open(target, 'r',errors="ignore")
     ips=fr.readlines()
     fr.close()
