@@ -41,6 +41,7 @@ def sqlmap(host,num):
                 print("写入文件：{}".format(host))
                 with open("sqlinj.txt",'a+',erros="ignore") as w:
                     w.write(host+"\n")
+                    w.flush()
             break
         elif staw.json()['status'] == 'running':
             continue
