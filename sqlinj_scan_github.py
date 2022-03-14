@@ -14,6 +14,7 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Geck
            "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",}
 
 def sqlmap(host,num):
+    global total_urls
     urlnew="http://127.0.0.1:8775/task/new"
     urlscan="http://127.0.0.1:8775/scan/"
     headers={"user-agent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.71 Safari/537.36"}
