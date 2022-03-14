@@ -43,8 +43,6 @@ def sqlmap(host,num):
         elif staw.json()['status'] == 'running':
             continue
 
-def start_sqlmapapi(aa):
-    os.system("python ./sqlmapproject-sqlmap-dcf304c/sqlmapapi.py -s")
 
 def poolmana(web_url,uuid,scanid,target):
     fr = open(target, 'r',errors="ignore")
@@ -57,9 +55,6 @@ def poolmana(web_url,uuid,scanid,target):
     num = 0
     p = Pool(processes=10)
     li = []
-    #sqlmapapi启动
-    res = p.apply_async(start_sqlmapapi,args=(11,))
-    li.append(res)
     for targeturl in target_url:
         try:
             num += 1
