@@ -70,10 +70,13 @@ def poolmana(web_url,uuid,scanid,target):
     p.join()
     f = open('sqlinj.txt','r',errors="ignore")
     aaa = f.readlines()
+    print("aaa:{}".format(aaa))
     sqlinj_url = []
     for inj_url in aaa:
         inj_url = inj_url.replace("\n","")
+        print("集合添加：{}".format(inj_url))
         sqlinj_url.append(inj_url)
+    print("sql_inj_url:{}".format(sqlinj_url))
     info_list = {"uuid":uuid,"scanid":scanid,"sqlinj_url":sqlinj_url}
     data = info_list
     print(data)
