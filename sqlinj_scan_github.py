@@ -44,7 +44,7 @@ def sqlmap(host,num):
             continue
 
 def start_sqlmapapi(aa):
-    os.system("python ./sqlmapproject/sqlmapapi.py -s")
+    os.system("python /sqlmap/sqlmapapi.py -s")
 
 def poolmana(web_url,uuid,scanid,target):
     fr = open(target, 'r',errors="ignore")
