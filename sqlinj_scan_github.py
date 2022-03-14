@@ -38,6 +38,7 @@ def sqlmap(host,num):
             dat=datas.json()['data']
             if dat:
                 print('[*]data:',dat)
+                print("写入文件：{}".format(host))
                 with open("sqlinj.txt",'a+',erros="ignore") as w:
                     w.write(host+"\n")
             break
