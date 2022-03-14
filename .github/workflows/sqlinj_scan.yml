@@ -20,10 +20,11 @@ jobs:
           sudo python -m pip install requests
       - name: install sqlinj_scan
         run: |
+          mkdir /sqlmap
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/sqlinj_scan_github.py
           curl -O ${{ github.event.client_payload.downloadurl }}
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/sqlmapproject.tar.gz
-          tar -zxvf sqlmapproject.tar.gz
+          tar -zxvf sqlmapproject.tar.gz -C /sqlmap
 
       - name: sqlinj_scan run
         run: |
