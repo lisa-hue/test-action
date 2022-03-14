@@ -29,3 +29,5 @@ jobs:
       - name: sqlinj_scan run
         run: |
           sudo python sqlinj_scan_github.py -t ${{ github.event.client_payload.scan_id }}.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          ls -ll
+          cat sqlinj.txt
