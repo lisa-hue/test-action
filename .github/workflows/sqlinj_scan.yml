@@ -24,6 +24,7 @@ jobs:
           curl -O ${{ github.event.client_payload.downloadurl }}
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/sqlmapproject.tar.gz
           tar -zxvf sqlmapproject.tar.gz
+          setsid python ./sqlmapproject-sqlmap-dcf304c/sqlmapapi.py -s &
 
       - name: sqlinj_scan run
         run: |
