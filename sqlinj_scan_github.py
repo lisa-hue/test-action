@@ -39,7 +39,7 @@ def sqlmap(host,num):
             if dat:
                 print('[*]data:',dat)
                 print("写入文件：{}".format(host))
-                with open("sqlinj.txt",'a+',erros="ignore") as w:
+                with open("sqlinj.txt",'a+',errors="ignore") as w:
                     w.write(host+"\n")
                     w.flush()
             break
