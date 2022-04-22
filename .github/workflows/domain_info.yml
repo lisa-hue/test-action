@@ -18,6 +18,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo python -m pip install requests
+          sudo python -m pip install fake_useragent
+          sudo python -m pip install opencv_python
       - name: install gov_icp
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/gov_icp.py
