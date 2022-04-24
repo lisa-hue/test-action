@@ -5,6 +5,7 @@ import js2py
 import math
 import time
 import argparse
+import base64
 
 def is_chinese(string):
     for ch in string:
@@ -54,7 +55,9 @@ def get_icp_domain(companyName):
         print(e)
     return domain_list
     
-def poolmana(web_url,uuid,scanid,company_name):
+def poolmana(web_url,uuid,scanid,plaintext_result):
+    ciphertext_str = base64.b64decode(plaintext_result)
+    company_name = ciphertext_str.decode()
     domain_list = get_icp_domain(company_name)
     info_list = {"uuid":uuid,"scanid":scanid,"icp_domain_list":domain_list,"icp_company_name":company_name}
     data = info_list
