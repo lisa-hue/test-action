@@ -226,7 +226,6 @@ def gov_main(company_name):
                 start_row = info_request.json()['params']['startRow']
                 end_row = info_request.json()['params']['endRow']
                 time.sleep(3)
-                a = 1 / "2"
             except Exception as e:
                 print("报错了{}".format(e))
                 continue
