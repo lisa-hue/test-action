@@ -26,4 +26,4 @@ jobs:
 
       - name: icp_zhanzhang run
         run: |
-          sudo python zhanzhang_icp.py -c ${{ github.event.client_payload.company_name }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo python zhanzhang_icp.py -c1 ${{ github.event.client_payload.company_name1 }} -c2 ${{ github.event.client_payload.company_name2 }} -c3 ${{ github.event.client_payload.company_name3 }} -c4 ${{ github.event.client_payload.company_name4 }} -c5 ${{ github.event.client_payload.company_name5 }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
