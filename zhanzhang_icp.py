@@ -87,6 +87,7 @@ if __name__ == '__main__':
     result_list.append(tmp)
     data = result_list
     print(data)
+    web_url = args.url
     rep = requests.post(url=web_url,json=data)
     print(rep.text)
     print("程序运行结束，查收")
