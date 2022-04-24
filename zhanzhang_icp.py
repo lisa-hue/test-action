@@ -60,13 +60,10 @@ def poolmana(web_url,uuid,scanid,plaintext_result):
     company_name = ciphertext_str.decode()
     domain_list = get_icp_domain(company_name)
     info_list = {"uuid":uuid,"scanid":scanid,"icp_domain_list":domain_list,"icp_company_name":company_name}
-    data = info_list
-    print(data)
-    rep = requests.post(url=web_url,json=data)
-    print(rep.text)
+    return info_list
 
 if __name__ == '__main__':
-    
+    result_list = []
     parser = argparse.ArgumentParser()
     parser.add_argument("-c1", "--company_name1", dest='company_name1', help="json数据")
     parser.add_argument("-c2", "--company_name2", dest='company_name2', help="json数据")
@@ -78,9 +75,18 @@ if __name__ == '__main__':
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     
     args = parser.parse_args()
-    poolmana(args.url,args.uuid,args.scanid,args.company_name1)
-    poolmana(args.url,args.uuid,args.scanid,args.company_name2)
-    poolmana(args.url,args.uuid,args.scanid,args.company_name3)
-    poolmana(args.url,args.uuid,args.scanid,args.company_name4)
-    poolmana(args.url,args.uuid,args.scanid,args.company_name5)
+    tmp = poolmana(args.url,args.uuid,args.scanid,args.company_name1)
+    result_list.append(tmp)
+    tmp = poolmana(args.url,args.uuid,args.scanid,args.company_name2)
+    result_list.append(tmp)
+    tmp = poolmana(args.url,args.uuid,args.scanid,args.company_name3)
+    result_list.append(tmp)
+    tmp = poolmana(args.url,args.uuid,args.scanid,args.company_name4)
+    result_list.append(tmp)
+    tmp = poolmana(args.url,args.uuid,args.scanid,args.company_name5)
+    result_list.append(tmp)
+    data = result_list
+    print(data)
+    rep = requests.post(url=web_url,json=data)
+    print(rep.text)
     print("程序运行结束，查收")
