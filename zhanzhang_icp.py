@@ -65,11 +65,19 @@ def poolmana(web_url,uuid,scanid,company_name):
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", "--company_name", dest='company_name', help="json数据")
+    parser.add_argument("-c1", "--company_name1", dest='company_name1', help="json数据")
+    parser.add_argument("-c2", "--company_name2", dest='company_name2', help="json数据")
+    parser.add_argument("-c3", "--company_name3", dest='company_name3', help="json数据")
+    parser.add_argument("-c4", "--company_name4", dest='company_name4', help="json数据")
+    parser.add_argument("-c5", "--company_name5", dest='company_name5', help="json数据")
     parser.add_argument("-u", "--url", dest='url', help="返回接口")
     parser.add_argument("-uid", "--uuid", dest='uuid', help="用户id")
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     
     args = parser.parse_args()
-    poolmana(args.url,args.uuid,args.scanid,args.company_name)
+    poolmana(args.url,args.uuid,args.scanid,args.company_name1)
+    poolmana(args.url,args.uuid,args.scanid,args.company_name2)
+    poolmana(args.url,args.uuid,args.scanid,args.company_name3)
+    poolmana(args.url,args.uuid,args.scanid,args.company_name4)
+    poolmana(args.url,args.uuid,args.scanid,args.company_name5)
     print("程序运行结束，查收")
