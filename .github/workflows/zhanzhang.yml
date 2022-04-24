@@ -1,6 +1,6 @@
 on:
   repository_dispatch:
-    types: [icp_domain_scan]
+    types: [icp_zhanzhang_domain_scan]
 
 jobs:
   build:
@@ -18,12 +18,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo python -m pip install requests
-          sudo python -m pip install fake_useragent
-          sudo python -m pip install opencv_python
-      - name: install gov_icp
+          sudo python -m pip install Js2Py
+      - name: install icp_zhanzhang
         run: |
-          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/zhanzhang.py
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/zhanzhang_icp.py
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/generatetoken.js
 
-      - name: gov_icp run
+      - name: icp_zhanzhang run
         run: |
-          sudo python gov_icp.py -c ${{ github.event.client_payload.company_name }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo python zhanzhang_icp.py -c ${{ github.event.client_payload.company_name }} -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
