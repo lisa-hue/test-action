@@ -59,7 +59,7 @@ def poolmana(web_url,uuid,scanid,plaintext_result):
     ciphertext_str = base64.b64decode(plaintext_result)
     company_name = ciphertext_str.decode()
     company_name = company_name.replace(")","）")
-    company_name = company_name.a.replace("(","（")
+    company_name = company_name.replace("(","（")
     domain_list = get_icp_domain(company_name)
     info_list = {"uuid":uuid,"scanid":scanid,"icp_domain_list":domain_list,"icp_company_name":company_name}
     return info_list
