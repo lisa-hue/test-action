@@ -18,8 +18,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo python -m pip install requests
-          sudo apt-get install golang
-          sudo apt-get install nuclei
+          echo "::group::Install Nuclei with go get"
+          [ ! -x /home/runner/go/bin/nuclei ] && go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+          echo "/home/runner/go/bin/" >> $GITHUB_PATH
+          echo "::endgroup::"
       - name: install spider_aiohttp
         run: |
           nuclei -json -o rs.json -es low,info -nts -u www.xcrmyy.cn
