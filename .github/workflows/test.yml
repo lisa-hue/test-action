@@ -1,12 +1,25 @@
 on:
   repository_dispatch:
-    types: [test_result]
+    types: [test-nuclei]
 
 jobs:
-  run_if_failure:
-    if: ${{ !github.event.client_payload.passed }}
+  build:
+  
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
     steps:
-      - env:
-          MESSAGE: ${{ github.event.client_payload.message }}
-        run: echo $MESSAGE
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo sudo apt-get install golang
+          sudo go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+      - name: install spider_aiohttp
+        run: |
+          nuclei -json -o rs.json -es low,info -nts -u www.xcrmyy.cn
