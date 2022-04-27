@@ -20,7 +20,7 @@ jobs:
           sudo python -m pip install requests
           sudo sudo apt-get install golang
           sudo go env -w GO111MODULE=on
-          sudo go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+          sudo go get -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
       - name: install spider_aiohttp
         run: |
           nuclei -json -o rs.json -es low,info -nts -u www.xcrmyy.cn
