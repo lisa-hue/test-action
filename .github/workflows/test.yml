@@ -24,4 +24,4 @@ jobs:
           echo "::endgroup::"
       - name: install spider_aiohttp
         run: |
-          nuclei -json -o rs.json -es low,info -nts -u 王好.net
+          nuclei -json -o rs.json -es low,info -nts -u 王好.net -vv
