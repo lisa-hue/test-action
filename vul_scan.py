@@ -1,0 +1,45 @@
+import requests
+import argparse
+import subprocess
+from urllib.parse import urlparse
+
+total_urls=[]
+
+headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0",
+           "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",}
+
+
+def nuclei_main():
+    
+
+def poolmana(web_url,uuid,scanid,target):
+    subprocess.Popen("nuclei -json -o rs.json -es low,info -nts -l target.txt", shell=True)
+    vul_info = []
+    with open("rs.json",errors="ignore") as f:
+        lines = f.readlines()
+        for a in lines:
+            line = json.loads(a)
+            name = line["info"]["name"]
+            severity = line["info"]["severity"]
+            matched-at = line["matched-at"]
+            url_info=urlparse(matched-at)
+            vul_host = url_info.netloc
+            vul_info.append({"vul_name":name,"vul_level":severity,"vul_url":matched-at,"vul_host":host})
+    info_list = {"uuid":uuid,"scanid":scanid,"vul_info":vul_info}
+    print(info_list)
+    #rep = requests.post(url=web_url,json=info_list)
+    #print(rep.text)
+
+
+
+if __name__ == '__main__':
+    
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--target", dest='target', help="json数据")
+    parser.add_argument("-u", "--url", dest='url', help="返回接口")
+    parser.add_argument("-uid", "--uuid", dest='uuid', help="用户id")
+    parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
+    
+    args = parser.parse_args()
+    poolmana(args.url,args.uuid,args.scanid,args.target)
+    print("程序运行结束，查收")
