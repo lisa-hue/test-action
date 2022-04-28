@@ -26,4 +26,4 @@ jobs:
           echo "::endgroup::"
       - name: run nuclei
         run: |
-          sudo python spider_aiohttp.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo python vul_scan.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
