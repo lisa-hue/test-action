@@ -10,7 +10,7 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Geck
 
 
 def poolmana(web_url,uuid,scanid):
-    subprocess.Popen("nuclei -json -o rs.json -es low,info -nts -l target.txt", shell=True)
+    #subprocess.Popen("nuclei -json -o rs.json -es low,info -nts -l target.txt", shell=True)
     vul_info = []
     with open("rs.json",errors="ignore") as f:
         lines = f.readlines()
