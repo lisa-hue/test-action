@@ -18,10 +18,12 @@ jobs:
       - name: Install dependencies
         run: |
           sudo python -m pip install requests
+          curl -o target.txt ${{ github.event.client_payload.downloadurl }}
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/vul_scan.py
           echo "::group::Install Nuclei with go get"
           [ ! -x /home/runner/go/bin/nuclei ] && go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
           echo "/home/runner/go/bin/" >> $GITHUB_PATH
           echo "::endgroup::"
-      - name: install spider_aiohttp
+      - name: run nuclei
         run: |
-          nuclei -json -o rs.json -es low,info -nts -u 王好.net -vv
+          sudo python spider_aiohttp.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
