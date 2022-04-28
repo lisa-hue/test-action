@@ -23,8 +23,8 @@ def poolmana(web_url,uuid,scanid):
             vul_info.append({"vul_name":name,"vul_level":severity,"vul_url":matched_at,"vul_host":vul_host})
     info_list = {"uuid":uuid,"scanid":scanid,"vul_info":vul_info}
     print(info_list)
-    #rep = requests.post(url=web_url,json=info_list)
-    #print(rep.text)
+    rep = requests.post(url=web_url,json=info_list)
+    print(rep.text)
 
 
 
