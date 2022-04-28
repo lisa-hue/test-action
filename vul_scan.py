@@ -18,10 +18,10 @@ def poolmana(web_url,uuid,scanid):
             line = json.loads(a)
             name = line["info"]["name"]
             severity = line["info"]["severity"]
-            matched-at = line["matched-at"]
-            url_info=urlparse(matched-at)
+            matched_at = line["matched-at"]
+            url_info=urlparse(matched_at)
             vul_host = url_info.netloc
-            vul_info.append({"vul_name":name,"vul_level":severity,"vul_url":matched-at,"vul_host":host})
+            vul_info.append({"vul_name":name,"vul_level":severity,"vul_url":matched_at,"vul_host":vul_host})
     info_list = {"uuid":uuid,"scanid":scanid,"vul_info":vul_info}
     print(info_list)
     #rep = requests.post(url=web_url,json=info_list)
