@@ -26,4 +26,5 @@ jobs:
           echo "::endgroup::"
       - name: run nuclei
         run: |
+          nuclei -json -o rs.json -es low,info -nts -l target.txt
           sudo python vul_scan.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
