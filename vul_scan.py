@@ -9,9 +9,6 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Geck
            "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",}
 
 
-def nuclei_main():
-    
-
 def poolmana(web_url,uuid,scanid):
     subprocess.Popen("nuclei -json -o rs.json -es low,info -nts -l target.txt", shell=True)
     vul_info = []
