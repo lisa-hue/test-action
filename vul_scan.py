@@ -12,7 +12,7 @@ headers = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Geck
 def nuclei_main():
     
 
-def poolmana(web_url,uuid,scanid,target):
+def poolmana(web_url,uuid,scanid):
     subprocess.Popen("nuclei -json -o rs.json -es low,info -nts -l target.txt", shell=True)
     vul_info = []
     with open("rs.json",errors="ignore") as f:
@@ -35,11 +35,10 @@ def poolmana(web_url,uuid,scanid,target):
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--target", dest='target', help="json数据")
     parser.add_argument("-u", "--url", dest='url', help="返回接口")
     parser.add_argument("-uid", "--uuid", dest='uuid', help="用户id")
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     
     args = parser.parse_args()
-    poolmana(args.url,args.uuid,args.scanid,args.target)
+    poolmana(args.url,args.uuid,args.scanid)
     print("程序运行结束，查收")
