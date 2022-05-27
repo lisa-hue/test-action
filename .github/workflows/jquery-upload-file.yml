@@ -1,6 +1,6 @@
 on:
   repository_dispatch:
-    types: [thinkphp_construct_code_exec]
+    types: [jquery-upload-file]
 
 jobs:
   build:
