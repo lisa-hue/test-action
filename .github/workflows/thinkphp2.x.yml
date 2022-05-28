@@ -34,4 +34,4 @@ jobs:
           
       - name: ThinkPHP2.x run
         run: |
-          sudo python jquery_upload_file.py -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo python ThinkPHP2.x -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
