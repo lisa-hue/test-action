@@ -1,6 +1,6 @@
 on:
   repository_dispatch:
-    types: [Thinkphp5_5.0.22_5.1.29_Remote_Code_Execution.py]
+    types: [Thinkphp5_5.0.22_5.1.29_Remote_Code_Execution]
 
 jobs:
   build:
