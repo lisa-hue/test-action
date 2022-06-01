@@ -53,7 +53,7 @@ def query_main():
             print("报错了")
             continue
         if not data["status"] == 0:
-            print("没查到"+url)
+            print("没查到"+url+data["msg"])
             continue
         
         totalPageNum = data['data']['totalPageNum']
@@ -81,7 +81,7 @@ def query_main():
                 domain_info_list.append({"domain_name":domain_name,"company_name":company_name,"icpNo":icpNo,"orgType":orgType,"pid":pid})
     print(domain_info_list)
     data = {"uuid":uuid,"scanid":scanid,"domain_info_list":domain_info_list}
-    rep = requests.post(url=return_url,json=domain_info_list)
+    rep = requests.post(url=return_url,json=data)
     print(rep.text)
     
 if __name__ == '__main__':
@@ -101,4 +101,5 @@ if __name__ == '__main__':
     cookie = args.cookie
     return_url = args.url
     query_main()
+    
     
