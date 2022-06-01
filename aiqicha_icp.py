@@ -53,8 +53,12 @@ def query_main():
         if not data["status"] == 0:
             print("没查到"+url+data["msg"])
             continue
-        
-        totalPageNum = data['data']['totalPageNum']
+        totalPageNum = 0
+        try
+            totalPageNum = data['data']['totalPageNum']
+        except:
+            continue
+            
         if totalPageNum == 0:
             continue
         for now_page in range(1,totalPageNum+1):
@@ -64,7 +68,11 @@ def query_main():
                 w.write(url+"\n")
             
             data = get_data(url)
-            resultList = data['data']['resultList']
+            resultList = []
+            try:
+                resultList = data['data']['resultList']
+            except:
+                continue
             for result in resultList:
                 openStatus = result['openStatus']
                 if not openStatus == "开业" or openStatus == "-":
