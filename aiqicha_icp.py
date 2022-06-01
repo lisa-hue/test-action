@@ -54,7 +54,7 @@ def query_main():
             print("没查到"+url+data["msg"])
             continue
         totalPageNum = 0
-        try
+        try:
             totalPageNum = data['data']['totalPageNum']
         except:
             continue
