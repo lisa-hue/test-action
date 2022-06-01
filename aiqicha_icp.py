@@ -15,12 +15,7 @@ return_url = ""
 uuid = ""
 scanid = ""
 
-headers = {
-    "Accept": "text/plain, */*; q=0.01",
-    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0',
-    'cookie':cookie,
-    'Referer': 'https://aiqicha.baidu.com/icpsearch?entry=21'
-    }
+headers = {}
 
 #查详情
 #https://aiqicha.baidu.com/detail/basicAllDataAjax?pid=28680294833142
@@ -92,18 +87,24 @@ if __name__ == '__main__':
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     parser.add_argument("-op", "--orgType", dest='orgType', help="组织机构类型")
     parser.add_argument("-ode", "--outdate", dest='outdate', help="日期")
-    #parser.add_argument("-ck", "--cookie", dest='cookie', help="cookie")
+    parser.add_argument("-ck", "--cookie", dest='cookie', help="cookie")
     args = parser.parse_args()
     uuid = args.uuid
     scanid = args.scanid
     query_orgType = args.orgType
     out_date = args.outdate
-    #cookie = args.cookie
+    cookie = args.cookie
     return_url = args.url
-    cookie = ""
-    with open('cookie.txt',encoding="utf-8",errors='ignore') as f:
-        lines = f.readlines()
-        cookie = lines[0]
+    #cookie = ""
+    #with open('cookie.txt',encoding="utf-8",errors='ignore') as f:
+    #    lines = f.readlines()
+    #    cookie = lines[0]
+    headers = {
+    "Accept": "text/plain, */*; q=0.01",
+    'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0',
+    'cookie':cookie,
+    'Referer': 'https://aiqicha.baidu.com/icpsearch?entry=21'
+    }
     query_main()
     
     
