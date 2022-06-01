@@ -8,8 +8,8 @@ import argparse
 from requests.adapters import HTTPAdapter
 
 
-query_orgType = "企业"
-out_date = "2022-05-24"
+query_orgType = ""
+out_date = ""
 cookie = ""
 return_url = ""
 uuid = ""
@@ -92,14 +92,18 @@ if __name__ == '__main__':
     parser.add_argument("-sid", "--scanid", dest='scanid', help="任务id")
     parser.add_argument("-op", "--orgType", dest='orgType', help="组织机构类型")
     parser.add_argument("-ode", "--outdate", dest='outdate', help="日期")
-    parser.add_argument("-ck", "--cookie", dest='cookie', help="cookie")
+    #parser.add_argument("-ck", "--cookie", dest='cookie', help="cookie")
     args = parser.parse_args()
     uuid = args.uuid
     scanid = args.scanid
     query_orgType = args.orgType
     out_date = args.outdate
-    cookie = args.cookie
+    #cookie = args.cookie
     return_url = args.url
+    cookie = ""
+    with open('cookie.txt',encoding="utf-8",errors='ignore') as f:
+        lines = f.readlines()
+        cookie = lines[0]
     query_main()
     
     
