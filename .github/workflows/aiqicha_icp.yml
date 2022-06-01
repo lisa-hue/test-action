@@ -21,7 +21,7 @@ jobs:
       - name: install icp_aiqicha
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/aiqicha_icp.py
-          echo ${{ github.event.client_payload.cookie }} > cookie.txt
+          echo '${{ github.event.client_payload.cookie }}'> cookie.txt
           cat cookie.txt
 
       - name: icp_aiqicha run
