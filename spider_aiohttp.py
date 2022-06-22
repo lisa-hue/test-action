@@ -9,9 +9,9 @@ from urllib.parse import urlparse
 from urllib.parse import urljoin
 
 
-timeout = aiohttp.ClientTimeout(total=8)
+timeout = aiohttp.ClientTimeout(total=10)
 #信号量
-sem_num = 10
+sem_num = 20
 num = 0
 total_urls=[]
 
@@ -93,7 +93,7 @@ async def test(sem,url):
                 for x in temp_list:
                     url = x
                     if url.startswith("http"):
-                        if "?" in url:
+                        if "?" in url and "=" in url:
                             print(url)
                         async with session.get(url,timeout=timeout) as resp:
                             status = resp.status
@@ -117,7 +117,7 @@ async def test(sem,url):
                                         #print("-------------"+str(len(new_urls)))
                                     
             for url in old_urls:
-                if "?" in url:
+                if "?" in url and "=" in url:
                     parseres = urlparse(url)
                     if parseres.path == "":
                         continue
