@@ -17,14 +17,19 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
+          sudo apt install nmap -y
           sudo python -m pip install requests
           sudo python -m pip install aiohttp
           sudo python -m pip install beautifulsoup4
+          sudo python -m pip install python-nmap
       - name: install spider_aiohttp
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/spider_aiohttp.py
-          curl -O ${{ github.event.client_payload.downloadurl }}
-
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/alive_scan.py
+          curl -o host.txt ${{ github.event.client_payload.downloadurl }}
+      - name: alive_scan run
+        run: |
+          sudo python alive_scan.py
       - name: spider_aiohttp run
         run: |
-          sudo python spider_aiohttp.py -t ${{ github.event.client_payload.scan_id }}.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo python spider_aiohttp.py -t url.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
