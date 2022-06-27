@@ -22,13 +22,14 @@ def sqlmap(host,num):
     id=jsons['taskid']
     scan=urlscan+id+"/start"
     print("[*]scanurl:",scan)
-    data=json.dumps({"url":"{}".format(host),"smart":True,"timeout":"10","Threads":3,"keepAlive":True,"nullConnection":True,"tech":"BEUSQ"})
+    data=json.dumps({"url":"{}".format(host),"smart":True,"timeout":"10","Threads":3,"keepAlive":True,"nullConnection":True})
     headerss={"Content-Type":"application/json"}
     scans=requests.post(url=scan,headers=headerss,data=data)
     swq=scans.json()
     print('--------STATUS---------')
     status="http://127.0.0.1:8775/scan/{}/status".format(id)
     print(status)
+    print(host)
     while True:
         time.sleep(2)
         staw=requests.get(url=status,headers=headers)
