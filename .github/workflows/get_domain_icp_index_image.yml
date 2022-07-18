@@ -21,6 +21,10 @@ jobs:
           chrome --version
           chromeversion="$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
           echo $chromeversion
+      - name: cat version
+        run: |
+          echo "--------"
+          echo $chromeversion
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
