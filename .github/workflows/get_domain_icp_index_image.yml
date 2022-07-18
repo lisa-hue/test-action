@@ -21,7 +21,6 @@ jobs:
       - name: install Chrome_fonts
         run: |
           sudo apt-get install ttf-wqy* -y
-          sudo nano /etc/fonts/conf.avail/69-language-selector-zh-cn.conf
       
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
