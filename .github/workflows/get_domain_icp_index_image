@@ -1,0 +1,37 @@
+on:
+  repository_dispatch:
+    types: [get_domain_icp_index_image]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+    steps:
+      - name: config chrome
+        uses: actions/checkout@v2
+        uses: nanasess/setup-chromedriver@v1
+        with:
+          chromedriver-version: '88.0.4324.96'
+        run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo python -m pip install selenium
+      - name: get_domain_icp_index_image
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/get_domain_icp_index_image.py
+          
+      - name: get_domain_icp_index_image run
+        run: |
+          sudo python get_domain_icp_index_image.py --url ${{ github.event.client_payload.url }} --uuid ${{ github.event.client_payload.uuid }} --scanid ${{ github.event.client_payload.scan_id }} --domaininfos ${{ github.event.client_payload.domaininfos }}
