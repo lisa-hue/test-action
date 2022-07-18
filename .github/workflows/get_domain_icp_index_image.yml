@@ -13,12 +13,14 @@ jobs:
     steps:
       - uses: browser-actions/setup-chrome@latest
         env:
-          chromeversion: "103.0.5060.114"
+          chromeversion: "103.0.5060"
         with:
           chrome-version: stable
       - name: cat version
         run: |
           chrome --version
+          chromeversion="$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
+          echo $chromeversion
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
