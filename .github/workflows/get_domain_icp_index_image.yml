@@ -47,4 +47,4 @@ jobs:
           
       - name: get_domain_icp_index_image run
         run: |
-          sudo python get_domain_icp_index_image.py --url ${{ github.event.client_payload.url }} --uuid ${{ github.event.client_payload.uuid }} --scanid ${{ github.event.client_payload.scan_id }} --company_name ${{ github.event.client_payload.company_name }} --domain_name ${{ github.event.client_payload.domain_name }} --index_url ${{ github.event.client_payload.index_url }}
+          sudo python get_domain_icp_index_image.py --url ${{ github.event.client_payload.url }} --uuid ${{ github.event.client_payload.uuid }} --scanid ${{ github.event.client_payload.scan_id }} --company_name ${{ github.event.client_payload.company_name }} --domain_name ${{ github.event.client_payload.domain_name }} --index_url ${{ github.event.client_payload.index_url }} --vul_id ${{ github.event.client_payload.vul_id }}
