@@ -63,6 +63,7 @@ if __name__ == '__main__':
     parser.add_argument("--company_name", dest='company_name', help="company_name")
     parser.add_argument("--domain_name", dest='domain_name', help="domain_name")
     parser.add_argument("--index_url", dest='index_url', help="index_url")
+    parser.add_argument("--vul_id", dest='vul_id', help="vul_id")
     
     args = parser.parse_args()
     flag = True
@@ -76,7 +77,7 @@ if __name__ == '__main__':
         if index_image_base64 == "":
             flag = False
         
-    info_list = {"uuid":args.uuid,"scanid":args.scanid,"domain_name":args.domain_name,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
+    info_list = {"uuid":args.uuid,"scanid":args.scanid,"vul_id":args.vul_id,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
     print(info_list)
     rep = requests.post(url=args.url,json=info_list)
     #print(rep.text)
