@@ -12,31 +12,22 @@ jobs:
         python-version: [3.8]
     steps:
       - uses: browser-actions/setup-chrome@latest
-        env:
-          AABBCC: "103.0.5060"
         with:
           chrome-version: stable
-      - name: cat version
-        run: |
-          chrome --version
-          chromeversion="$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
-          echo $chromeversion
-          echo $AABBCC
-      - run: echo $CURRENT_USER
+      - run: echo $CHROME_VERSION
         env:
-          CURRENT_USER: shanyue
+          CHROME_VERSION: nihao
 
-      - name: Check GITHUB_ENV
+      - name: Check CHROME_VERSION
         run: |
-          echo $GITHUB_ENV
-          cat $GITHUB_ENV
-      - run: echo CURRENT_USER=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
-      - run: echo $CURRENT_USER
+          echo $CHROME_VERSION
+          echo CHROME_VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
+          echo $CHROME_VERSION
       
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chromedriver-version: $chromeversion
+          chromedriver-version: $CHROME_VERSION
       - name: config chromedriver runrunrun
         run: |
           export DISPLAY=:99
