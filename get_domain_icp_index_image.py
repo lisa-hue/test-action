@@ -77,7 +77,7 @@ if __name__ == '__main__':
         if index_image_base64 == "":
             flag = False
         
-    info_list = {"uuid":args.uuid,"scanid":args.scanid,"vul_id":args.vul_id,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
+    info_list = {"uuid":args.uuid,"scanid":args.scanid,"domain_name":args.domain_name,"vul_id":args.vul_id,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
     print(info_list)
     rep = requests.post(url=args.url,json=info_list)
     #print(rep.text)
