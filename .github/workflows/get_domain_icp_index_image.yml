@@ -23,6 +23,7 @@ jobs:
           echo $CHROME_VERSION
       - run: echo CHROME_VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
       - run: echo $CHROME_VERSION
+      - run: echo ${{ github }}
       
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
