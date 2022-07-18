@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: browser-actions/setup-chrome@latest
         env:
-          chromeversion: "103.0.5060"
+          chromeversionenv: "103.0.5060"
         with:
           chrome-version: stable
       - name: cat version
@@ -21,6 +21,7 @@ jobs:
           chrome --version
           chromeversion="$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
           echo $chromeversion
+          echo $chromeversionenv
       - name: cat version
         run: |
           echo "--------"
