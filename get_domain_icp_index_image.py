@@ -7,9 +7,20 @@ import base64
 import argparse
 import requests
 
+def get_chrome_driver():
+    from selenium import webdriver
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
+    return webdriver.Chrome(options=options)
+
+
 def get_icp_image(company_name,domain_name):
     try:
-        driver = webdriver.Chrome()
+        #driver = webdriver.Chrome()
+        driver = get_chrome_driver()
         driver.maximize_window()
         driver.get('https://icp.chinaz.com/'+domain_name)
         icp_company_name_element=WebDriverWait(driver,50,0.5).until(EC.presence_of_element_located((By.XPATH,'//*[@id="first"]/li[1]/p/a')))
@@ -32,7 +43,8 @@ def get_icp_image(company_name,domain_name):
         
 def get_index_image(index_url):
     try:
-        driver = webdriver.Chrome()
+        #driver = webdriver.Chrome()
+        driver = get_chrome_driver()
         driver.maximize_window()
         driver.get(index_url)
         index_image_base64 = driver.get_screenshot_as_base64()
@@ -64,7 +76,7 @@ if __name__ == '__main__':
         if index_image_base64 == "":
             flag = False
         
-    info_list = {"uuid":args.uuid,"scanid":args.scanid,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
+    info_list = {"uuid":args.uuid,"scanid":args.scanid,"domain_name":args.domain_name,"icp_image_base64":icp_image_base64,"index_image_base64":index_image_base64,"flag":flag}
     print(info_list)
     rep = requests.post(url=args.url,json=info_list)
     #print(rep.text)
