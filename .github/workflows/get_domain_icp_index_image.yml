@@ -24,7 +24,7 @@ jobs:
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chromedriver-version: "LATEST_RELEASE"
+          chromedriver-version: $chromeversion
       - name: config chromedriver runrunrun
         run: |
           export DISPLAY=:99
