@@ -21,13 +21,13 @@ jobs:
       - name: Check CHROME_VERSION
         run: |
           echo $CHROME_VERSION
-          echo CHROME_VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
-          echo $CHROME_VERSION
+      - run: echo CHROME_VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
+      - run: echo $CHROME_VERSION
       
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
-          chromedriver-version: $CHROME_VERSION
+          chromedriver-version: ${{CHROME_VERSION}}
       - name: config chromedriver runrunrun
         run: |
           export DISPLAY=:99
