@@ -49,12 +49,12 @@ def get_index_image(index_url):
         width = driver.execute_script("return document.documentElement.scrollWidth")
         height = driver.execute_script("return document.documentElement.scrollHeight")
         driver.set_window_size(width,height) #修改浏览器窗口大小
-        image_path = os.getcwd()+"/"+'icp.png'
-        driver.get_screenshot_as_file(image_path)
-        f=open(image_path,'rb') #二进制方式打开图文件
-        index_image_base64=base64.b64encode(f.read()) #读取文件内容，转换为base64编码
-        f.close()
-        #index_image_base64 = driver.get_screenshot_as_base64()
+        #image_path = os.getcwd()+"/"+'icp.png'
+        #driver.get_screenshot_as_file(image_path)
+        #f=open(image_path,'rb') #二进制方式打开图文件
+        #index_image_base64=base64.b64encode(f.read()) #读取文件内容，转换为base64编码
+        #f.close()
+        index_image_base64 = driver.get_screenshot_as_base64()
         return index_image_base64
     except Exception as e:
         print(e)
