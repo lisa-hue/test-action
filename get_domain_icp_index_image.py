@@ -26,7 +26,8 @@ def get_icp_image(company_name,domain_name):
             with open("temp.jpg",'wb') as f:
                 f.write(imgdata)
             """
-    except:
+    except Exception as e:
+        print(e)
         return ""
         
 def get_index_image(index_url):
@@ -36,7 +37,8 @@ def get_index_image(index_url):
         driver.get(index_url)
         index_image_base64 = driver.get_screenshot_as_base64()
         return index_image_base64
-    except:
+    except Exception as e:
+        print(e)
         return ""
 
     
