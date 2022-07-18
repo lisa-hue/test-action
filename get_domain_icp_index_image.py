@@ -47,7 +47,7 @@ def get_index_image(index_url):
         driver = get_chrome_driver()
         driver.get(index_url)
         width = driver.execute_script("return document.documentElement.scrollWidth")
-        height = driver.execute_script("return document.documentElement.scrollHeight")
+        height = 1080
         driver.set_window_size(width,height) #修改浏览器窗口大小
         #image_path = os.getcwd()+"/"+'icp.png'
         #driver.get_screenshot_as_file(image_path)
