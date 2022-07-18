@@ -18,12 +18,10 @@ jobs:
         env:
           CHROME_VERSION: nihao
 
-      - name: Check CHROME_VERSION
+      - name: install Chrome_fonts
         run: |
-          echo $CHROME_VERSION
-      - run: echo CHROME_VERSION=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
-      - run: echo $CHROME_VERSION
-      - run: echo ${{ github.env }}
+          sudo apt-get install ttf-wqy* -y
+          sudo gedit /etc/fonts/conf.avail/69-language-selector-zh-cn.conf
       
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
