@@ -30,7 +30,7 @@ jobs:
         run: |
           echo $GITHUB_ENV
           cat $GITHUB_ENV
-      - run: echo CURRENT_USER=$(echo shanyue) >> $GITHUB_ENV
+      - run: echo CURRENT_USER=$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE) >> $GITHUB_ENV
       - run: echo $CURRENT_USER
       
       - name: config chromedriver
