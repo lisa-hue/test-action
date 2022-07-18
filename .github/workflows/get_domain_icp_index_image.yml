@@ -22,10 +22,17 @@ jobs:
           chromeversion="$(curl http://chromedriver.storage.googleapis.com/LATEST_RELEASE)"
           echo $chromeversion
           echo $AABBCC
-      - name: cat version
+      - run: echo $CURRENT_USER
+        env:
+          CURRENT_USER: shanyue
+
+      - name: Check GITHUB_ENV
         run: |
-          echo "--------"
-          echo $chromeversion
+          echo $GITHUB_ENV
+          cat $GITHUB_ENV
+      - run: echo CURRENT_USER=$(echo shanyue) >> $GITHUB_ENV
+      - run: echo $CURRENT_USER
+      
       - name: config chromedriver
         uses: nanasess/setup-chromedriver@v1
         with:
