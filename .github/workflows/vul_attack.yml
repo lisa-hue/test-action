@@ -32,4 +32,4 @@ jobs:
 
       - name: exp_attack run
         run: |
-          sudo python sqlinj_scan_github.py -t ${{ github.event.client_payload.scan_id }}.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
+          sudo ${{ github.event.client_payload.vul_exp_script }} -t ${{ github.event.client_payload.scan_id }}.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
