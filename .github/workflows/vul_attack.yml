@@ -1,0 +1,35 @@
+on:
+  repository_dispatch:
+    types: [exp_attack]
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.8]
+    steps:
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo python -m pip install requests
+          sudo python -m pip install Pillow
+      - name: get resource
+        run: |
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/exp/${{ github.event.client_payload.vul_exp_script }}
+          curl -O ${{ github.event.client_payload.downloadurl }}
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/sqlmapproject.tar.gz
+          curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/lib/black.jpg
+          tar -zxvf sqlmapproject.tar.gz
+          touch sqlinj.txt
+          chmod 777 sqlinj.txt
+          setsid python ./sqlmapproject-sqlmap-dcf304c/sqlmapapi.py -s &
+
+      - name: exp_attack run
+        run: |
+          sudo python sqlinj_scan_github.py -t ${{ github.event.client_payload.scan_id }}.txt -u ${{ github.event.client_payload.url }} -uid ${{ github.event.client_payload.uuid }} -sid ${{ github.event.client_payload.scan_id }}
