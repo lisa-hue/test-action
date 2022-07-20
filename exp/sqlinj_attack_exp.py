@@ -148,7 +148,7 @@ def sqlmap_attack(vul_info,num):
     cmd2 = "sudo python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --tables"
     print(cmd)
     try:
-        process = subprocess.Popen(cmd,stdout=subprocess.PIPE)
+        process = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
         print(">"*10)
         out, err = process.communicate()
         status = process.wait()
