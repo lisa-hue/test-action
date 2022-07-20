@@ -107,7 +107,7 @@ def sqlmap(vul_info,num):
                         print(vullist_json)
                         print("-"*15)
                     run_complete_verify_url = vullist_json
-                    run_complete_verify_url.append({"vul_id":vul_id,"vul_url":vul_url,"flag":True,"base64str":""})
+                    run_complete_verify_url.append({"vul_id":vul_id,"vul_url":vul_url,"flag":True,"base64str":"","payload":""})
                     #print(run_complete_verify_url)
                     with open("sqlinj.txt",'w',errors="ignore") as w:
                         data2 = json.dumps(run_complete_verify_url)
@@ -123,7 +123,7 @@ def sqlmap(vul_info,num):
                         print(vullist_json)
                         print("-"*15)
                     run_complete_verify_url = vullist_json
-                    run_complete_verify_url.append({"vul_id":vul_id,"vul_url":vul_url,"flag":True,"base64str":""})
+                    run_complete_verify_url.append({"vul_id":vul_id,"vul_url":vul_url,"flag":False,"base64str":"","payload":""})
                     with open("sqlinj.txt",'w',errors="ignore") as w:
                         data2 = json.dumps(run_complete_verify_url)
                         w.write(data2)
@@ -163,7 +163,8 @@ def sqlmap_attack(vul_info,num):
                 for vulinfo in vullist_json:
                     vul_url_json = vulinfo["vul_url"]
                     if vul_url == vul_url_json:
-                        temp = {"vul_id":vulinfo["vul_id"],"vul_url":vul_url,"flag":vulinfo["flag"],"base64str":base64str}
+                        payload = "python sqlmap.py"+" -u " +'"'+vul_url+'"' + " -v 0 --random-agent --technique=BEUSQ --batch -o --dbs"
+                        temp = {"vul_id":vulinfo["vul_id"],"vul_url":vul_url,"flag":vulinfo["flag"],"base64str":base64str,"payload":payload}
                         run_complete_attack_url.append(temp)
                     else:
                         run_complete_attack_url.append(vulinfo)
