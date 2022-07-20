@@ -141,7 +141,7 @@ def sqlmap(vul_info,num):
 def sqlmap_attack(vul_info,num):
     vul_url = vul_info["vul_url"]
     print("攻击>>>>>>>>>>>>>>"+str(num)+vul_url)
-    sqlmap_path = "/home/runner/work/test-action/test-action/sqlmapproject-sqlmap-dcf304c/sqlmap.py"
+    sqlmap_path = "./sqlmapproject-sqlmap-dcf304c/sqlmap.py"
     print("getcwd>>>>>>>>>>>>>>"+os.getcwd())
     #sqlmap_path = r"C:\fxh\tool\sqlmap\sqlmap.py"
     cmd = "sudo python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --dbs"
