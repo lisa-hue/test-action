@@ -33,11 +33,8 @@ def make_pic(a,linessss):
         imageFile = 'black.jpg'
         img = Image.open(imageFile)
         # 选择字体与大小
-        # 选择字体与大小
-        #windows
-        #font = ImageFont.truetype("msyh.ttc", size=20)
         #ubuntu
-        font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeMono.ttf", size=20)
+        font = ImageFont.truetype("FreeMono.ttf", size=20)
         y_text = 0
         for line in lines:
             word = """{}""".format(line)
