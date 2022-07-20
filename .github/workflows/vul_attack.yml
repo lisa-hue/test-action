@@ -22,7 +22,6 @@ jobs:
       - name: get resource
         run: |
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/exp/${{ github.event.client_payload.vul_exp_script }}
-          pwd
           curl -O ${{ github.event.client_payload.downloadurl }}
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/sqlmapproject.tar.gz
           curl -O https://raw.githubusercontent.com/lisa-hue/test-action/main/lib/black.jpg
