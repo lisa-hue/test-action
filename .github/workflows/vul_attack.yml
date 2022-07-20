@@ -29,6 +29,7 @@ jobs:
           tar -zxvf sqlmapproject.tar.gz
           touch sqlinj.txt
           chmod 777 sqlinj.txt
+          ls -ll
           setsid python ./sqlmapproject-sqlmap-dcf304c/sqlmapapi.py -s &
           
 
