@@ -29,6 +29,8 @@ jobs:
           touch sqlinj.txt
           chmod 777 sqlinj.txt
           setsid python ./sqlmapproject-sqlmap-dcf304c/sqlmapapi.py -s &
+          pwd
+          ls -ll
 
       - name: exp_attack run
         run: |
